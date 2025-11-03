@@ -1,0 +1,45 @@
+﻿@model IEnumerable<_23dh171095_MyStore.Models.Product>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="bg-success">Danh Sach San Pham </h2>
+   <table class="table bg-info col-lg-8 col-md-6 col-sm-3">
+<tr>
+    <th class="bg-success"> Tên sản phẩm    </th>
+
+    <th class="bg-success"> Đơn giá </th>
+
+    <th class="bg-success"> Hình ảnh </th>
+
+    <th class="bg-success">Danh Mục </th>
+    <th class="bg-success"></th>
+
+
+</tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td> @Html.DisplayFor(modelItem => item.ProductName) </td>
+        <td> @Html.DisplayFor(modelItem => item.ProductPrice)</td>
+        <td> @Html.DisplayFor(modelItem => item.ProductImage)</td>
+        <td> @Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+        <td>
+            @Html.ActionLink("Sua", "Edit", new { id = item.ProductID } ,  new { @class = "btn btn-primary" })
+            @Html.ActionLink("Chi tiet", "Details", new { id = item.ProductID }, new { @class = "btn btn-primary" })) |
+            @Html.ActionLink("Xoa", "Delete", new { id = item.ProductID }, new { @class = "btn btn-primary" }))
+        </td>
+    </tr>
+}
+
+    </table>
+<p>
+    @Html.ActionLink("Them moi", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+</body>
+</html>

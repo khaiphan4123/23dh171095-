@@ -1,0 +1,28 @@
+﻿@model _23dh171095_MyStore.Models.Category
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Thong Tin Chi Tiet Danh Muc</h2>
+
+<div>
+    <hr />
+    <dl class="dropdown-menu-lg">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.CategoryName)*@
+            Ten Danh Muc
+        </dt>
+    @*Gia tri cua truong CategoryName*@
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cap Nhat", "Edit",  new { @class = "btn btn-primary btn-sm" })
+    @Html.ActionLink("Quay lai danh sach", "Index" ,null ,new {@class= "btn btn-primary btn-sm"})
+</p>
