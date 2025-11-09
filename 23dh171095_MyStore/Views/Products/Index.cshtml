@@ -5,7 +5,14 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-
+<head>
+    <style>
+        img{
+            height:150px;
+            max-width:150px;
+        }
+    </style>
+</head>
 <h2 class="bg-success">Danh Sach San Pham </h2>
    <table class="table bg-info col-lg-8 col-md-6 col-sm-3">
 <tr>
@@ -26,7 +33,7 @@
     <tr>
         <td> @Html.DisplayFor(modelItem => item.ProductName) </td>
         <td> @Html.DisplayFor(modelItem => item.ProductPrice)</td>
-        <td> @Html.DisplayFor(modelItem => item.ProductImage)</td>
+        <td> <img src="@Html.DisplayFor(modelItem => item.ProductImage)"</td>
         <td> @Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
         <td>
             @Html.ActionLink("Sua", "Edit", new { id = item.ProductID } ,  new { @class = "btn btn-primary" })

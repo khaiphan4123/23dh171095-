@@ -19,8 +19,9 @@ namespace _23dh171095_MyStore.Models
         public int OrderID { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
+        public int ProDetailProDetID { get; set; }
     
         public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual ProDetail ProDetail { get; set; }
     }
 }

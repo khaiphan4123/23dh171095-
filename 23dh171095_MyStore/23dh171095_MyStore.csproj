@@ -139,8 +139,11 @@
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -148,9 +151,14 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>MyStoreModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Color.cs">
+      <DependentUpon>MyStoreModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>MyStoreModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\customer2.cs" />
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\MyStoreModel1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,7 +180,14 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>MyStoreModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartialClasses.cs" />
+    <Compile Include="Models\ProDetail.cs">
+      <DependentUpon>MyStoreModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
+      <DependentUpon>MyStoreModel1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supplier.cs">
       <DependentUpon>MyStoreModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -181,7 +196,18 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>MyStoreModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\user2.cs" />
+    <Compile Include="Models\ViewsModel\Cart.cs" />
+    <Compile Include="Models\ViewsModel\CartItem.cs" />
+    <Compile Include="Models\ViewsModel\CartService.cs" />
+    <Compile Include="Models\ViewsModel\CheckOutVM.cs" />
+    <Compile Include="Models\ViewsModel\HomeProductVM.cs" />
+    <Compile Include="Models\ViewsModel\LoginVM.cs" />
+    <Compile Include="Models\ViewsModel\Order.cs" />
+    <Compile Include="Models\ViewsModel\OrderDetail.cs" />
+    <Compile Include="Models\ViewsModel\ProductDetailsVM.cs" />
     <Compile Include="Models\ViewsModel\ProductSearchVM.cs" />
+    <Compile Include="Models\ViewsModel\RegisterVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +227,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\CustomerHome.css" />
+    <Content Include="Content\MyStyle\CustomerDetailProduct.css" />
+    <Content Include="Content\MyStyle\CustomerHome.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -209,6 +238,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyStoreModel1.edmx</DependentUpon>
       <LastGenOutput>MyStoreModel1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MyStoreModel1.edmx.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Models\MyStoreModel1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -280,11 +312,27 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Categories\PVCreateEditCategory.cshtml" />
+    <Content Include="Views\Home - Copy\About.cshtml" />
+    <Content Include="Views\Home - Copy\Contact.cshtml" />
+    <Content Include="Views\Home - Copy\Index.cshtml" />
+    <Content Include="Views\Home\_PVFeatureProduct.cshtml" />
+    <Content Include="Views\Home\_PVNewProduct.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home - Copy\Test.cshtml" />
+    <Content Include="Views\Home\ProductDetails.cshtml" />
+    <Content Include="Views\Home\_PVTopProduct.cshtml" />
+    <Content Include="Views\Home\_PVRelatedProduct.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Account\" />
     <Folder Include="Areas\Admin\Views\ProductsDefault\" />
+    <Folder Include="Models\NewFolder1\" />
+    <Folder Include="Views\Metadata\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

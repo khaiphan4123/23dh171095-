@@ -1,0 +1,43 @@
+﻿
+@model _23dh171095_MyStore.Models.ViewsModel.HomeProductVM
+
+
+@* PHẦN SẢN PHẨM NỔI BẬT *@
+<div class="product-group-container">
+    <h2 class="group-title">Sản phẩm nổi bật</h2>
+    <div class="product-list-container">
+        <ul class="product-list">
+            @if (Model.FeaturedProducts != null && Model.FeaturedProducts.Any())
+            {
+                @foreach (var item in Model.FeaturedProducts)
+                {
+                    <li class="product-item">
+                        <div class="product-box">
+                            <img src="@Url.Content(item.Image)" alt="@item.ProductName" class="product-image" />
+                            <div class="product-info">
+                                <p class="product-name">
+                                    <a href="@Url.Action("Detail", "Product", new { id = item.ProductID })">
+                                        @item.ProductName
+                                    </a>
+                                </p>
+                                <p class="product-price">@item.Price.ToString("N0") VNĐ</p>
+                                <p class="product-description">@item.ProductDescription</p>
+                            </div>
+                            <div class="product-actions">
+                                <a href="@Url.Action("AddToCart", "Cart", new { id = item.ProductID })" class="btn-buy">
+                                    Mua ngay
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="col-12 text-center">
+                    <p>Không có sản phẩm nổi bật nào để hiển thị.</p>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

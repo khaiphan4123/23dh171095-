@@ -44,7 +44,8 @@
     <Property Name="Quantity" Type="Int32" Nullable="false" />
     <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
     <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__Order__31EC6D26" FromRole="OrderDetail" ToRole="Order" />
-    <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__Produ__30F848ED" FromRole="OrderDetail" ToRole="Product" />
+    <NavigationProperty Name="ProDetail" Relationship="MystoreModel.ProDetailOrderDetail" FromRole="OrderDetail" ToRole="ProDetail" />
+    <Property Name="ProDetailProDetID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -56,8 +57,8 @@
     <Property Name="ProductPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Pro_Category" FromRole="Product" ToRole="Category" />
-    <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__30F848ED" FromRole="Product" ToRole="OrderDetail" />
     <Property Name="ProductDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProDetails" Relationship="MystoreModel.ProductProDetail" FromRole="Product" ToRole="ProDetail" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -126,18 +127,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderDeta__Produ__30F848ED">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="ProductID" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="ProductID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="MystoreEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -162,9 +151,107 @@
       <End Role="Order" EntitySet="Orders" />
       <End Role="OrderDetail" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__Produ__30F848ED" Association="Self.FK__OrderDeta__Produ__30F848ED">
+    <EntitySet Name="Colors" EntityType="MystoreModel.Color" />
+    <EntitySet Name="Suppliers" EntityType="MystoreModel.Supplier" />
+    <EntitySet Name="ProDetails" EntityType="MystoreModel.ProDetail" />
+    <AssociationSet Name="ProductProDetail" Association="MystoreModel.ProductProDetail">
       <End Role="Product" EntitySet="Products" />
+      <End Role="ProDetail" EntitySet="ProDetails" />
+    </AssociationSet>
+    <AssociationSet Name="SupplierProDetail" Association="MystoreModel.SupplierProDetail">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="ProDetail" EntitySet="ProDetails" />
+    </AssociationSet>
+    <AssociationSet Name="ColorProDetail" Association="MystoreModel.ColorProDetail">
+      <End Role="Color" EntitySet="Colors" />
+      <End Role="ProDetail" EntitySet="ProDetails" />
+    </AssociationSet>
+    <AssociationSet Name="ProDetailOrderDetail" Association="MystoreModel.ProDetailOrderDetail">
+      <End Role="ProDetail" EntitySet="ProDetails" />
       <End Role="OrderDetail" EntitySet="OrderDetails" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Color">
+    <Key>
+      <PropertyRef Name="ColorId" />
+    </Key>
+    <Property Name="ColorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+    <Property Name="ColorName" Type="String" Nullable="false" />
+    <Property Name="RGB" Type="String" Nullable="false" />
+    <NavigationProperty Name="ProDetails" Relationship="MystoreModel.ColorProDetail" FromRole="Color" ToRole="ProDetail" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupID" />
+    </Key>
+    <Property Name="SupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupName" Type="String" Nullable="false" />
+    <Property Name="Address" Type="String" Nullable="false" />
+    <NavigationProperty Name="ProDetails" Relationship="MystoreModel.SupplierProDetail" FromRole="Supplier" ToRole="ProDetail" />
+  </EntityType>
+  <EntityType Name="ProDetail">
+    <Key>
+      <PropertyRef Name="ProDetID" />
+    </Key>
+    <Property Name="ProDetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Price" Type="Decimal" Nullable="false" />
+    <Property Name="RemainQuantity" Type="Int32" Nullable="false" />
+    <Property Name="SoldQuantity" Type="Int32" Nullable="false" />
+    <Property Name="ViewQuantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="MystoreModel.ProductProDetail" FromRole="ProDetail" ToRole="Product" />
+    <Property Name="ProductProductID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Supplier" Relationship="MystoreModel.SupplierProDetail" FromRole="ProDetail" ToRole="Supplier" />
+    <Property Name="SupplierSupID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Color" Relationship="MystoreModel.ColorProDetail" FromRole="ProDetail" ToRole="Color" />
+    <Property Name="ColorColorId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OrderDetails" Relationship="MystoreModel.ProDetailOrderDetail" FromRole="ProDetail" ToRole="OrderDetail" />
+  </EntityType>
+  <Association Name="ProductProDetail">
+    <End Type="MystoreModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="MystoreModel.ProDetail" Role="ProDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProDetail">
+        <PropertyRef Name="ProductProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SupplierProDetail">
+    <End Type="MystoreModel.Supplier" Role="Supplier" Multiplicity="1" />
+    <End Type="MystoreModel.ProDetail" Role="ProDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupID" />
+      </Principal>
+      <Dependent Role="ProDetail">
+        <PropertyRef Name="SupplierSupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ColorProDetail">
+    <End Type="MystoreModel.Color" Role="Color" Multiplicity="1" />
+    <End Type="MystoreModel.ProDetail" Role="ProDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Color">
+        <PropertyRef Name="ColorId" />
+      </Principal>
+      <Dependent Role="ProDetail">
+        <PropertyRef Name="ColorColorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProDetailOrderDetail">
+    <End Type="MystoreModel.ProDetail" Role="ProDetail" Multiplicity="1" />
+    <End Type="MystoreModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProDetail">
+        <PropertyRef Name="ProDetID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProDetailProDetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

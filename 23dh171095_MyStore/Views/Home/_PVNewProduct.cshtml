@@ -1,0 +1,46 @@
+﻿@model_23dh171095_MyStore.Models.ViewsModel.HomeProductVM
+     
+@using PagedList.Mvc; @* Cần thêm directive này để sử dụng Html.PagedListPager *@
+
+@* PHẦN SẢN PHẨM MỚI (Đã Phân trang) *@
+<div class="product-group-container">
+    <h2 class="group-title">Sản phẩm mới</h2>
+    <div class="product-list-container">
+        <ul class="product-list">
+            @if (Model.NewProducts != null && Model.NewProducts.Any())
+            {
+                @foreach (var item in Model.NewProducts)
+                {
+                    <li class="product-item">
+                        <div class="product-box">
+                            <img src="@Url.Content(item.Image)" alt="@item.ProductName" class="product-image" />
+                            <div class="product-info">
+                                <p class="product-name">
+                                    <a href="@Url.Action("Detail", "Product", new { id = item.ProductID })">
+                                        @item.ProductName
+                                    </a>
+                                </p>
+                                <p class="product-price">@item.Price.ToString("N0") VNĐ</p>
+                                <p class="product-description">@item.ProductDescription</p>
+                            </div>
+                            <div class="product-actions">
+                                <a href="@Url.Action("AddToCart", "Cart", new { id = item.ProductID })" class="btn-buy">
+                                    Mua ngay
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="col-12 text-center">
+                    <p>Không tìm thấy sản phẩm mới nào phù hợp.</p>
+                </li>
+            }
+        </ul>
+    </div>
+
+    }
+
+</div>
